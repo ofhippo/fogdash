@@ -1,0 +1,16 @@
+{
+  "name": "fogdash",
+  "description": "A dashboard for monitoring stats on a FogBugz milestone.",
+  "author": "Joel Birchler",
+  "version": "0.0.1",
+  "license": "BSD",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "express": "3.0.6",
+    "jade": "*",
+    "underscore": "1.4.x"
+  }
+}
