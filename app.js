@@ -37,16 +37,23 @@ app.get('/', function(req, res){
 
 
 //
-// Socket.io handlers
+// Socket.io
 //
 
-io.sockets.on('connection', function (socket) {
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
-});
+var rnd = 42;
 
+var emitRnd = function() {
+  io.sockets.emit('rnd', {value: rnd});
+}
+
+setInterval(function() {
+  rnd = Math.round(Math.random() * 100);
+  emitRnd();
+}, 10 * 1000);
+
+io.sockets.on('connection', function (socket) {
+  emitRnd();
+});
 
 //
 // Kick it off

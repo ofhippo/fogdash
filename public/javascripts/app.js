@@ -1,9 +1,8 @@
 (function() {
   
   var socket = io.connect('http://localhost');
-  socket.on('news', function (data) {
+  socket.on('rnd', function (data) {
     console.log(data);
-    socket.emit('my other event', { my: 'data' });
   });
   
 })();
