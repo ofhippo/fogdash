@@ -1,4 +1,8 @@
-This is a quick and dirty dashboard for FogBugz.
+This is a quick and dirty dashboard for FogBugz. It is written for [DECK Monitoring](https://github.com/deck/)'s workflow and displays the follow for the current milestone:
+
+* Number of points (FogBug hours) remaining vs target (noon to noon due to our planning and demo meetings)
+* Number of cases remaining
+* A chart of the cases by status (column) and category (color)
 
 # Up and Running
 
