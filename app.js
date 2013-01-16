@@ -1,8 +1,13 @@
-var express = require('express'), 
-  http = require('http'),
+var express = require('express'),
+  app = express(),
+  server = require('http').createServer(app),
+  io = require('socket.io').listen(server),
   path = require('path');
-
-var app = express();
+  
+  
+//
+// Configuration
+//
 
 app.configure(function() {
   app.set('port', process.env.PORT || 3000);
@@ -21,10 +26,32 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+
+//
+// Express routes
+//
+
 app.get('/', function(req, res){
   res.render('index', { title: 'FogDash' });
 });
 
-http.createServer(app).listen(app.get('port'), function() {
+
+//
+// Socket.io handlers
+//
+
+io.sockets.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+});
+
+
+//
+// Kick it off
+//
+
+server.listen(app.get('port'), function() {
   console.log("Express server listening on port " + app.get('port'));
 });
