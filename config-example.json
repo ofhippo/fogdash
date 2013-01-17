@@ -3,5 +3,6 @@
   "token": "go get one",
   "team": 3,
   "sprintStartHour": 13,
-  "sprintEndHour": 15
+  "sprintEndHour": 15,
+  "pollSeconds": 600
 }

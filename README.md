@@ -13,6 +13,7 @@ Copy the `config-example.json` to `config.json` and update the properties to mee
 * `team`: The FogBugz project id (`ixFixFor` in FB API speak)
 * `sprintStartHour`: The hour of the day (0-23) that your sprint starts. We use this to exclude the planning meeting.
 * `sprintEndHour`: The hour of the day (0-23) that marks the end of your sprint. We use this exclude the demo and retrospective.
+* `pollSeconds`: Please do not hammer FogBugz. We use the licensed self-hosted version.
 
 # License
 

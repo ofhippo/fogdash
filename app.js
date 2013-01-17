@@ -2,7 +2,10 @@ var express = require('express'),
   app = express(),
   server = require('http').createServer(app),
   io = require('socket.io').listen(server),
-  path = require('path');
+  path = require('path'),
+  _ = require('underscore'),
+  fogbugz = require('./fogbugz.js'),
+  config = require('./config.json');
   
   
 //
@@ -40,27 +43,49 @@ app.get('/', function(req, res){
 // Socket.io
 //
 
-///// TODO: We just need to send the final stat counts over (not individual cases).
-///// The counting of this should be in the fogbugz package.
+var stats;
 
-var rnd = 42;
-
-var emitRnd = function() {
-  io.sockets.emit('rnd', {value: rnd});
+var emitStats = function() {
+  stats && io.sockets.emit('stats', stats);
 }
 
-setInterval(function() {
-  rnd = Math.round(Math.random() * 100);
-  emitRnd();
-}, 10 * 1000);
-
 io.sockets.on('connection', function (socket) {
-  emitRnd();
+  emitStats();
 });
+
+//
+// FogBugz polling
+//
+
+var fetchStats = function() {
+  fogbugz.fetchMilestones(function(err, milestones) {
+    if (err) {
+      console.error(err);
+    } else {
+      var now = new Date();
+      var currentMilestone = _.find(milestones, function(milestone) {
+        return milestone.endDate && (milestone.endDate > now) && milestone.startDate && (milestone.startDate < now);
+      });
+
+      fogbugz.fetchCases(currentMilestone, function(err, cases) {
+        console.log(fogbugz.stats(currentMilestone, cases));
+        // update and emit stats if they are different than what we already have
+      });
+    }
+  });
+}
+
+setInterval(
+  fetchStats, 
+  config.pollSeconds * 1000
+);
+
 
 //
 // Kick it off
 //
+
+fetchStats();
 
 server.listen(app.get('port'), function() {
   console.log("Express server listening on port " + app.get('port'));
