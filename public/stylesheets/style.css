@@ -1,8 +1,51 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 30px;
+  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: bold;
+  color: #999;
+  margin-bottom: 30px;
+}
+
+div.stat {
+  width: 300px;
+  margin-right: 50px;
+  margin-bottom: 80px;
+  border-top: 3px solid black;
+  float: left;
+}
+
+div.stat h2 {
+  font-size: 140px;
+  font-weight: bold;
+}
+
+div.stat p {
+  padding: 0 12px;
+}
+
+table {
+  border-top: 3px solid black;
+  width: 1000px;
+  text-align: left;
+}
+
+td, th {
+  padding: 4px 12px;
+  width: 20%;
+}
+
+th {
+  border-bottom: 1px dotted black;
+}
+
+.clear {
+  clear: both;
 }

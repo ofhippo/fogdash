@@ -1,8 +1,39 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 It 102
+
+  .stat
+    h2 19
+    p Open Cases
+  
+  .stat
+    h2 32
+    p Remaining Points
+
+  .stat
+    h2 35
+    p Target Points
+    
+  .clear
+  
+  table
+    tr
+      th New
+      th Active
+      th To Review
+      th To Deploy
+      th Done
+    tr
+      td &hearts; &hearts; &hearts; &oplus;
+      td &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7;
+      td 
+      td 
+      td 
+  
+
+  
+  //p Welcome to #{title}
   //      * Number of points (FogBug hours) remaining vs target
   //      * Number of cases remaining
   //      * A chart of the cases by status (column) and category (color) by POINT
