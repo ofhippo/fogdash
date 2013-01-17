@@ -43,7 +43,7 @@ app.get('/', function(req, res){
 // Socket.io
 //
 
-var stats;
+var stats = {};
 
 var emitStats = function() {
   stats && io.sockets.emit('stats', stats);
@@ -66,11 +66,16 @@ var fetchStats = function() {
       var currentMilestone = _.find(milestones, function(milestone) {
         return milestone.endDate && (milestone.endDate > now) && milestone.startDate && (milestone.startDate < now);
       });
-
-      fogbugz.fetchCases(currentMilestone, function(err, cases) {
-        console.log(fogbugz.stats(currentMilestone, cases));
-        // update and emit stats if they are different than what we already have
-      });
+      
+      if (currentMilestone) {
+        fogbugz.fetchCases(currentMilestone, function(err, cases) {
+          var latestStats = fogbugz.stats(currentMilestone, cases);
+          if (!_.isEqual(latestStats, stats)) {
+            stats = latestStats;
+            emitStats();
+          }
+        });
+      }
     }
   });
 }
