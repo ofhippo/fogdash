@@ -40,6 +40,9 @@ app.get('/', function(req, res){
 // Socket.io
 //
 
+///// TODO: We just need to send the final stat counts over (not individual cases).
+///// The counting of this should be in the fogbugz package.
+
 var rnd = 42;
 
 var emitRnd = function() {
