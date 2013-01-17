@@ -1,5 +1,7 @@
 {
   "url": "http://fogbugz.my-fogbugz-domain-here.com/api.asp",
   "token": "go get one",
-  "team": 3
+  "team": 3,
+  "sprintStartHour": 13,
+  "sprintEndHour": 15
 }

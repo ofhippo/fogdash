@@ -81,3 +81,38 @@ exports.fetchCases = function(milestone, callback) {
       }
   });
 }
+
+exports.stats = function(milestone, cases) {
+  var stats = {
+    estimate: 0,
+    elapsed: 0,
+    openCases: 0,
+    status: {}
+  }
+  
+  _.each(cases, function(bug) {
+    stats.estimate += bug.estimate;
+    stats.elapsed += bug.elapsed;
+    if (bug.isOpen) { stats.openCases++; }
+    
+    stats.status[bug.status] || (stats.status[bug.status] = {});
+    stats.status[bug.status][bug.category] || (stats.status[bug.status][bug.category] = {estimate: 0, count: 0});
+    stats.status[bug.status][bug.category].estimate += bug.estimate;
+    stats.status[bug.status][bug.category].count += 1;
+  });
+  
+  stats.remaining = stats.estimate - stats.elapsed;
+        
+  // Note: this is a simple target (and does not think about weekends or work hours)
+  var now = new Date(),
+    sprintStart = (new Date(milestone.startDate)).setHours(config.sprintStartHour),
+    sprintEnd = (new Date(milestone.endDate)).setHours(config.sprintEndHour);
+  
+  var total = sprintEnd - sprintStart;
+  var current = now - sprintStart;
+  var ratio = 1 - current/total;
+  
+  stats.target = Math.round(stats.estimate * ratio);
+  
+  return stats;
+}
