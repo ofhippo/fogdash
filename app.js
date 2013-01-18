@@ -70,7 +70,11 @@ var fetchStats = function() {
     } else {
       var now = new Date();
       var latestMilestone = _.find(milestones, function(milestone) {
-        return milestone.endDate && (milestone.endDate > now) && milestone.startDate && (milestone.startDate < now);
+        if (!milestone.endDate || !milestone.startDate) return false;
+        var endDate = milestone.endDate;
+        endDate.setHours(23);
+        endDate.setMinutes(59);
+        return (endDate > now) && (milestone.startDate < now);
       });
       
       if (latestMilestone) {
@@ -81,6 +85,7 @@ var fetchStats = function() {
         
         fogbugz.fetchCases(currentMilestone, function(err, cases) {
           var latestStats = fogbugz.stats(currentMilestone, cases);
+
           if (!_.isEqual(latestStats, stats)) {
             stats = latestStats;
             emitStats();
