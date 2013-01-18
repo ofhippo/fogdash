@@ -4,6 +4,8 @@ This is a simple dashboard for FogBugz. It is written for [DECK Monitoring](http
 * Number of cases remaining
 * A chart of the cases by status (column) and category (color)
 
+![](http://github.com/joelbirchler/fogdash/raw/master/screenshot.png)
+
 # Up and Running
 
 Copy the `config-example.json` to `config.json` and update the properties to meet your needs.
