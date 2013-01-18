@@ -14,6 +14,7 @@ Copy the `config-example.json` to `config.json` and update the properties to mee
 * `sprintStartHour`: The hour of the day (0-23) that your sprint starts. We use this to exclude the planning meeting.
 * `sprintEndHour`: The hour of the day (0-23) that marks the end of your sprint. We use this exclude the demo and retrospective.
 * `pollSeconds`: Please do not hammer FogBugz. We use the licensed self-hosted version.
+* `chartStates`: These are the states at the bottom of the dashboard. Warning: In this first iteration, the last one is always a magical catch-all. Any bug with a status that doesn't match the others will be put in this column.
 
 # License
 

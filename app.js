@@ -35,7 +35,7 @@ app.configure('development', function(){
 //
 
 app.get('/', function(req, res){
-  res.render('index', { title: 'FogDash' });
+  res.render('index', { chartStates: config.chartStates });
 });
 
 

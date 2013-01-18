@@ -17,19 +17,14 @@ block content
     
   .clear
   
-  table
+  - var i, chartStatesLength = chartStates.length, percent = 1/chartStatesLength;
+  table#statusChart
     tr
-      th New
-      th Active
-      th To Review
-      th To Deploy
-      th Done
+      - for (i = 0; i < chartStatesLength; i++)
+        th(style="width: #{percent}%")= chartStates[i]
     tr
-      td &#x25A7; &#x25A7; &#x25A7; &#x25A7;
-      td &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7; &#x25A7;
-      td Can we make these headings dynamic or at least configurable? 
-      td
-      td 
+      - for (i = 0; i < chartStatesLength; i++)
+        td
   
 
   
