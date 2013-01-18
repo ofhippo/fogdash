@@ -45,6 +45,18 @@ th {
   border-bottom: 1px dotted black;
 }
 
+#colorLegend {
+  width: 1150px;
+  padding: 50px 12px 0 12px;
+  text-align: left;
+  font-weight: normal;
+  font-size: 12px;
+}
+
+#colorLegend span {
+  margin-right: 30px;
+}
+
 .clear {
   clear: both;
 }

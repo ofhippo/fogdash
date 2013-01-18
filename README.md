@@ -16,6 +16,9 @@ Copy the `config-example.json` to `config.json` and update the properties to mee
 * `pollSeconds`: Please do not hammer FogBugz. We use the licensed self-hosted version.
 * `chartStates`: These are the states at the bottom of the dashboard. Warning: In this first iteration, the last one is always a magical catch-all. Any bug with a status that doesn't match the others will be put in this column.
 
+Start the server:
+`node app.js`
+
 # License
 
 The license is the good old BSD 3-clause.
