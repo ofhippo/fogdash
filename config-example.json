@@ -4,5 +4,6 @@
   "team": 3,
   "sprintStartHour": 13,
   "sprintEndHour": 15,
-  "pollSeconds": 600
+  "pollSeconds": 600,
+  "chartStates": ["New", "Active", "To Review", "Code Complete", "To Deploy", "Done"]
 }
