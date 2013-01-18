@@ -2,7 +2,7 @@
   "name": "fogdash",
   "description": "A dashboard for monitoring stats on a FogBugz milestone.",
   "author": "Joel Birchler",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "BSD",
   "private": true,
   "scripts": {
@@ -12,6 +12,8 @@
     "express": "3.0.6",
     "jade": "*",
     "underscore": "1.4.x",
-    "socket.io": "0.9.13"
+    "socket.io": "0.9.13",
+    "request": "2.12.0",
+    "xml2js": "0.2.2"
   }
 }
