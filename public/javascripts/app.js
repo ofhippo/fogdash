@@ -55,9 +55,21 @@ $(function() {
     }
   });
   
-  socket.on('milestone', function (data) {
+  socket.on('milestone', function(data) {
     if (data) {
       data['title'] && $('#milestoneTitle').html(data['title']);
+    }
+  });
+  
+  var postTemplate = _.template("<div class='post'><h2><%= from %> <span><%= (new Date(when)).toString() %></span></h2><p><%= message %></div>");
+  
+  socket.on('feed', function(data) {
+    if (data) {
+      var $feed = $('#feed'),
+        $children = $feed.children();
+      
+      if ($children.length > 2) { $children.last().remove(); }
+      $feed.prepend(postTemplate(data));
     }
   });
   

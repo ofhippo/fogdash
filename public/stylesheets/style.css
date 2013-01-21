@@ -47,7 +47,7 @@ th {
 
 #colorLegend {
   width: 1150px;
-  padding: 50px 12px 0 12px;
+  padding: 30px 12px 12px 12px;
   text-align: left;
   font-weight: normal;
   font-size: 12px;
@@ -55,6 +55,27 @@ th {
 
 #colorLegend span {
   margin-right: 30px;
+}
+
+#feed {
+  border-top: 1px dotted black;
+  width: 1150px;
+  padding: 12px;
+  font-size: 14px;
+  line-height: 1.5em;
+}
+
+#feed h2 {
+  font-weight: bold;
+}
+
+#feed h2 span {
+  font-weight: normal;
+  color: #999;
+}
+
+#feed p {
+  margin-bottom: 20px;
 }
 
 .clear {

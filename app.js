@@ -38,6 +38,26 @@ app.get('/', function(req, res){
   res.render('index', { chartStates: config.chartStates });
 });
 
+app.get('/feed-me', function(req, res) {
+  if (req.query['token'] != config.feedToken) {
+    res.statusCode = 403;
+    res.send("403 Forbidden, folks.\n");
+    return;
+  }
+  
+  if (!req.query['from'] || !req.query['message']) {
+    res.statusCode = 400;
+    res.send("400 Bad Request: 'from' and 'message' parameters are required.\n");
+    return;
+  }
+  
+  io.sockets.emit('feed', {'from': req.query['from'], 'message': req.query['message'], 'when': new Date()});
+  
+  res.statusCode = 200;
+  res.send("OK\n");
+});
+
+
 
 //
 // Socket.io
