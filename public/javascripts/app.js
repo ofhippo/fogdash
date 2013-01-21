@@ -41,7 +41,7 @@ $(function() {
 
         _.each(state, function(bug, bugType) {
           var blurb = "<span style='color: " + getColor(bugType) + "' title='" + bugType + "'>" + caseSymbol + "</span> ";
-          _.times(bug.estimate, function() {
+          _.times(bug.count, function() {
             cell.append(blurb);
           });
         });
