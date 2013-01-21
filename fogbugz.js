@@ -110,7 +110,7 @@ exports.stats = function(milestone, cases) {
   
   var total = sprintEnd - sprintStart;
   var current = now - sprintStart;
-  var ratio = 1 - current/total;
+  var ratio = (current > total) ? 0 : 1 - current/total;
   
   stats.target = Math.round(stats.estimate * ratio);
   

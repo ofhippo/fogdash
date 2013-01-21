@@ -31,7 +31,7 @@ $(function() {
     if (data) {
       // top big number stats
       _.each(statKeys, function(statKey) {
-        data[statKey] && $('#' + statKey).html(data[statKey]);
+        _.has(data, statKey) && $('#' + statKey).html(data[statKey]);
       });
             
       // bug status chart
