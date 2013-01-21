@@ -68,13 +68,14 @@ var fetchStats = function() {
     if (err) {
       console.error(err);
     } else {
-      var now = new Date();
-      var latestMilestone = _.find(milestones, function(milestone) {
+      var now = new Date(),
+        latestMilestone;
+      
+      _.each(milestones, function(milestone) {
         if (!milestone.endDate || !milestone.startDate) return false;
-        var endDate = milestone.endDate;
-        endDate.setHours(23);
-        endDate.setMinutes(59);
-        return (endDate > now) && (milestone.startDate < now);
+        if (milestone.startDate > now) return false;
+        if (latestMilestone && milestone.startDate < latestMilestone.startDate) return false;
+        latestMilestone = milestone;
       });
       
       if (latestMilestone) {
