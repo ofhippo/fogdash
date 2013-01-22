@@ -96,9 +96,10 @@ exports.stats = function(milestone, cases) {
     if (bug.isOpen) { stats.openCases++; }
     
     stats.status[bug.status] || (stats.status[bug.status] = {});
-    stats.status[bug.status][bug.category] || (stats.status[bug.status][bug.category] = {estimate: 0, count: 0});
+    stats.status[bug.status][bug.category] || (stats.status[bug.status][bug.category] = {estimate: 0, count: 0, titles: []});
     stats.status[bug.status][bug.category].estimate += bug.estimate;
     stats.status[bug.status][bug.category].count += 1;
+    stats.status[bug.status][bug.category].titles.push(bug.category + " (" + bug.id + "): " + bug.title);
   });
   
   stats.remaining = stats.estimate - stats.elapsed;

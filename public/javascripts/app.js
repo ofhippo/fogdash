@@ -40,8 +40,10 @@ $(function() {
         cell.empty();
 
         _.each(state, function(bug, bugType) {
-          var blurb = "<span style='color: " + getColor(bugType) + "' title='" + bugType + "'>" + caseSymbol + "</span> ";
+          var color = getColor(bugType);
           _.times(bug.count, function() {
+            var title = bug.titles.pop();
+            var blurb = "<span style='color: " + color + "' title='" + title + "'>" + caseSymbol + "</span> ";
             cell.append(blurb);
           });
         });
