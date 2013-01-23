@@ -4,7 +4,7 @@ $(function() {
   var caseSymbol = "&#x25A7;";
   var colors = ["#90CA77", "#81C6DD", "#E9B64D", "#732C7B", "#dd6600", "#207A57", "#186A99", "#999999"];
   var statKeys = ['openCases', 'remaining', 'target'];
-  
+
   // a color mapping function
   var colorMap = {};
   var getColor = function(bugType) {
@@ -33,15 +33,19 @@ $(function() {
       _.each(statKeys, function(statKey) {
         _.has(data, statKey) && $('#' + statKey).html(data[statKey]);
       });
-            
+
       // bug status chart
       _.each(data['status'], function(state, stateName) {
         var cell = chartMap[stateName] || chartLast;
         cell.empty();
 
-        _.each(state, function(bug, bugType) {
-          var blurb = "<span style='color: " + getColor(bugType) + "' title='" + bugType + "'>" + caseSymbol + "</span> ";
-          _.times(bug.count, function() {
+        _.each(state, function(bugGroup, bugType) {
+          var color = getColor(bugType);
+          _.each(bugGroup.bugs, function(bug) {
+            var title = bug.title.replace(/'/g, "&#39;");
+            var remaining = Math.round(bug.estimate - bug.elapsed);
+            var altText = bugType + " #" + bug.id + ": " + title + " (" + remaining + " remaining)";
+            var blurb = "<span style='color: " + color + "' title='" + altText + "'>" + caseSymbol + "</span> ";
             cell.append(blurb);
           });
         });
