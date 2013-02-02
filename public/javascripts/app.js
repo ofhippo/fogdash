@@ -34,6 +34,8 @@ $(function() {
         _.has(data, statKey) && $('#' + statKey).html(data[statKey]);
       });
 
+      var blurbTemplate = _.template("<span style='color:<%= color %>' title='<%= bugType %> #<%= bugId %>: <%= title %> (<%= remaining %> remaining)'>"+caseSymbol+"</span>");
+
       // bug status chart
       _.each(data['status'], function(state, stateName) {
         var cell = chartMap[stateName] || chartLast;
@@ -42,10 +44,13 @@ $(function() {
         _.each(state, function(bugGroup, bugType) {
           var color = getColor(bugType);
           _.each(bugGroup.bugs, function(bug) {
-            var title = bug.title.replace(/'/g, "&#39;");
-            var remaining = Math.round(bug.estimate - bug.elapsed);
-            var altText = bugType + " #" + bug.id + ": " + title + " (" + remaining + " remaining)";
-            var blurb = "<span style='color: " + color + "' title='" + altText + "'>" + caseSymbol + "</span> ";
+            var blurb = blurbTemplate({
+              color: color,
+              bugType: bugType,
+              bugId: bug.id,
+              title: bug.title.replace(/'/g, "&#39;"),
+              remaining: Math.round(bug.estimate - bug.elapsed)
+            });
             cell.append(blurb);
           });
         });
