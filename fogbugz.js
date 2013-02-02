@@ -103,16 +103,28 @@ exports.stats = function(milestone, cases) {
   
   stats.remaining = stats.estimate - stats.elapsed;
         
-  // Note: this is a simple target (and does not think about weekends or work hours)
+  // Note: this is a simplish target (does not think about work hours)
+  var weekday = function(date){
+    return !_.contains([0,6], date.getDay());
+  };
+
+  var nextDate = function(date){
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1)
+  };
+
   var now = new Date(),
-    sprintStart = (new Date(milestone.startDate)).setHours(config.sprintStartHour),
-    sprintEnd = (new Date(milestone.endDate)).setHours(config.sprintEndHour);
+    sprintStart = new Date(milestone.startDate),
+    sprintEnd = new Date(milestone.endDate),
+    workingDaysLeft = 0,
+    workingDaysTotal = 0;
   
-  var total = sprintEnd - sprintStart;
-  var current = now - sprintStart;
-  var ratio = (current > total) ? 0 : 1 - current/total;
-  
-  stats.target = Math.round(stats.estimate * ratio);
-  
+  for (var date = sprintStart; date <= sprintEnd; date = nextDate(date)) {
+    if (weekday(date)) {
+      workingDaysTotal++;
+      if(date >= now) { workingDaysLeft++; }
+    }
+  }
+
+  stats.target = Math.round(100 * workingDaysLeft / workingDaysTotal);
   return stats;
 }
